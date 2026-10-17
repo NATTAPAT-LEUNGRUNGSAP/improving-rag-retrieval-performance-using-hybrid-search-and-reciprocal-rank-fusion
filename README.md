@@ -1,4 +1,4 @@
-# Thai Contextual RAG with BM25, Vector Search, and Reciprocal Rank Fusion
+# Improving RAG Retrieval Performance Using Hybrid Search and Reciprocal Rank Fusion
 
 โปรเจกต์ Hands-on ตามสไลด์ Natural Language Processing สำหรับสร้าง Contextual RAG ด้วย OpenSearch โดยค้นหาแบบ Hybrid Search และรวมอันดับด้วย Reciprocal Rank Fusion (RRF)
 
