@@ -1,4 +1,4 @@
-# รายงานการวัดผล Authentic RAG
+# รายงานการวัดผล Thai Contextual RAG with BM25, Vector Search, and Reciprocal Rank Fusion
 
 วัดผลเมื่อวันที่ 17 ตุลาคม 2026 จาก corpus 53 chunks บน OpenSearch 2.19.1
 ผลฉบับเต็มสำหรับตรวจสอบซ้ำอยู่ใน `evaluation_report.json`
