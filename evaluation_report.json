@@ -1,0 +1,371 @@
+{
+  "methodology": {
+    "lab1": "Index completeness, field coverage, ID consistency, dimension, and storage.",
+    "lab2": "Human-labelled qrels with Hit@5, Precision@5, Recall@5, MRR, nDCG@5, and latency."
+  },
+  "model_load_ms": 9327.038,
+  "lab1": {
+    "status": "pass",
+    "checks": {
+      "both_indices_non_empty": true,
+      "document_counts_match": true,
+      "document_ids_match": true,
+      "all_documents_have_content": true,
+      "all_documents_have_context": true,
+      "embedding_dimension_is_1024": true
+    },
+    "embedding_dimension": 1024,
+    "indices": {
+      "anthropic-vector-index": {
+        "document_count": 53,
+        "store_size_bytes": 1584248,
+        "content_coverage": 1.0,
+        "context_coverage": 1.0,
+        "average_content_chars": 1633.6,
+        "average_context_chars": 224.32
+      },
+      "anthropic-bm25-index": {
+        "document_count": 53,
+        "store_size_bytes": 256951,
+        "content_coverage": 1.0,
+        "context_coverage": 1.0,
+        "average_content_chars": 1633.6,
+        "average_context_chars": 224.32
+      }
+    }
+  },
+  "lab2": {
+    "configuration": {
+      "questions": 5,
+      "top_k": 5,
+      "candidate_pool_per_retriever": 10,
+      "latency_repeats_per_question": 3,
+      "rrf_k": 60,
+      "qrels_note": "Human-defined relevant chunk IDs; review when corpus or chunking changes."
+    },
+    "aggregate_retrieval_metrics": {
+      "bm25": {
+        "hit@5": 0,
+        "precision@5": 0.0,
+        "recall@5": 0.0,
+        "reciprocal_rank": 0.0,
+        "ndcg@5": 0.0
+      },
+      "vector": {
+        "hit@5": 1,
+        "precision@5": 0.36,
+        "recall@5": 0.9333,
+        "reciprocal_rank": 1.0,
+        "ndcg@5": 0.8617
+      },
+      "rrf": {
+        "hit@5": 1,
+        "precision@5": 0.36,
+        "recall@5": 0.9333,
+        "reciprocal_rank": 1.0,
+        "ndcg@5": 0.8617
+      }
+    },
+    "latency": {
+      "bm25_search": {
+        "mean_ms": 3.855,
+        "p95_ms": 6.992,
+        "min_ms": 2.066,
+        "max_ms": 6.992
+      },
+      "embedding": {
+        "mean_ms": 42.43,
+        "p95_ms": 57.053,
+        "min_ms": 27.398,
+        "max_ms": 57.053
+      },
+      "vector_search": {
+        "mean_ms": 14.581,
+        "p95_ms": 19.72,
+        "min_ms": 8.293,
+        "max_ms": 19.72
+      },
+      "rrf_fusion": {
+        "mean_ms": 0.01,
+        "p95_ms": 0.013,
+        "min_ms": 0.006,
+        "max_ms": 0.013
+      },
+      "hybrid_total": {
+        "mean_ms": 60.878,
+        "p95_ms": 82.647,
+        "min_ms": 40.207,
+        "max_ms": 82.647
+      }
+    },
+    "answer_output_checks": {
+      "file_found": true,
+      "question_count": 5,
+      "all_answers_non_empty": true,
+      "all_questions_have_top_k_results": true,
+      "contains_api_error": false
+    },
+    "per_query": [
+      {
+        "id": "q1",
+        "question": "โรคหัดและโรคหัดเยอรมันแตกต่างกันอย่างไร?",
+        "relevant_doc_ids": [
+          "doc_1",
+          "doc_8"
+        ],
+        "methods": {
+          "bm25": {
+            "top_doc_ids": [],
+            "metrics": {
+              "hit@5": 0,
+              "precision@5": 0.0,
+              "recall@5": 0.0,
+              "reciprocal_rank": 0.0,
+              "ndcg@5": 0.0
+            }
+          },
+          "vector": {
+            "top_doc_ids": [
+              "doc_1",
+              "doc_2",
+              "doc_3",
+              "doc_8",
+              "doc_6"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.8772
+            }
+          },
+          "rrf": {
+            "top_doc_ids": [
+              "doc_1",
+              "doc_2",
+              "doc_3",
+              "doc_8",
+              "doc_6"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.8772
+            }
+          }
+        }
+      },
+      {
+        "id": "q2",
+        "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+        "relevant_doc_ids": [
+          "doc_2",
+          "doc_13"
+        ],
+        "methods": {
+          "bm25": {
+            "top_doc_ids": [],
+            "metrics": {
+              "hit@5": 0,
+              "precision@5": 0.0,
+              "recall@5": 0.0,
+              "reciprocal_rank": 0.0,
+              "ndcg@5": 0.0
+            }
+          },
+          "vector": {
+            "top_doc_ids": [
+              "doc_2",
+              "doc_0",
+              "doc_1",
+              "doc_13",
+              "doc_15"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.8772
+            }
+          },
+          "rrf": {
+            "top_doc_ids": [
+              "doc_2",
+              "doc_0",
+              "doc_1",
+              "doc_13",
+              "doc_15"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.8772
+            }
+          }
+        }
+      },
+      {
+        "id": "q3",
+        "question": "ทำไมโรคหัดเยอรมันจึงมีอันตรายกับหญิงตั้งครรภ์?",
+        "relevant_doc_ids": [
+          "doc_6",
+          "doc_11"
+        ],
+        "methods": {
+          "bm25": {
+            "top_doc_ids": [],
+            "metrics": {
+              "hit@5": 0,
+              "precision@5": 0.0,
+              "recall@5": 0.0,
+              "reciprocal_rank": 0.0,
+              "ndcg@5": 0.0
+            }
+          },
+          "vector": {
+            "top_doc_ids": [
+              "doc_6",
+              "doc_1",
+              "doc_2",
+              "doc_4",
+              "doc_11"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.8503
+            }
+          },
+          "rrf": {
+            "top_doc_ids": [
+              "doc_6",
+              "doc_1",
+              "doc_2",
+              "doc_4",
+              "doc_11"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.8503
+            }
+          }
+        }
+      },
+      {
+        "id": "q4",
+        "question": "ถ้าคนที่ฉีดวัคซีนป้องกันโรคหัดเยอรมันแล้ว จะมีโอกาสติดเชื้อหรือไม่?",
+        "relevant_doc_ids": [
+          "doc_13"
+        ],
+        "methods": {
+          "bm25": {
+            "top_doc_ids": [],
+            "metrics": {
+              "hit@5": 0,
+              "precision@5": 0.0,
+              "recall@5": 0.0,
+              "reciprocal_rank": 0.0,
+              "ndcg@5": 0.0
+            }
+          },
+          "vector": {
+            "top_doc_ids": [
+              "doc_13",
+              "doc_2",
+              "doc_11",
+              "doc_1",
+              "doc_6"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.2,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 1.0
+            }
+          },
+          "rrf": {
+            "top_doc_ids": [
+              "doc_13",
+              "doc_2",
+              "doc_11",
+              "doc_1",
+              "doc_6"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.2,
+              "recall@5": 1.0,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 1.0
+            }
+          }
+        }
+      },
+      {
+        "id": "q5",
+        "question": "โรคหัดเยอรมันมีผลกระทบอย่างไรต่อระบบสาธารณสุขและเศรษฐกิจของประเทศ?",
+        "relevant_doc_ids": [
+          "doc_1",
+          "doc_6",
+          "doc_13"
+        ],
+        "methods": {
+          "bm25": {
+            "top_doc_ids": [],
+            "metrics": {
+              "hit@5": 0,
+              "precision@5": 0.0,
+              "recall@5": 0.0,
+              "reciprocal_rank": 0.0,
+              "ndcg@5": 0.0
+            }
+          },
+          "vector": {
+            "top_doc_ids": [
+              "doc_1",
+              "doc_2",
+              "doc_6",
+              "doc_3",
+              "doc_10"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 0.6667,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.7039
+            }
+          },
+          "rrf": {
+            "top_doc_ids": [
+              "doc_1",
+              "doc_2",
+              "doc_6",
+              "doc_3",
+              "doc_10"
+            ],
+            "metrics": {
+              "hit@5": 1,
+              "precision@5": 0.4,
+              "recall@5": 0.6667,
+              "reciprocal_rank": 1.0,
+              "ndcg@5": 0.7039
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -96,6 +96,26 @@ python onlysearchAuthenticRAG.py
 
 ผลลัพธ์จะถูกบันทึกเป็น `authentic_rag_search_results.json`
 
+## 6. วัดผล Lab 1 และ Lab 2
+
+หลังจาก OpenSearch ทำงานและมีข้อมูลในทั้งสอง index แล้ว ให้รัน:
+
+```bash
+python evaluate_performance.py
+```
+
+สคริปต์ประเมินดังนี้:
+
+- **Lab 1:** จำนวนเอกสาร, ความครบถ้วนของ content/context, embedding dimension,
+  ความตรงกันของ document IDs และขนาด index
+- **Lab 2:** เปรียบเทียบ BM25, Vector และ RRF ด้วย Hit@5, Precision@5,
+  Recall@5, MRR, nDCG@5 และ latency
+
+ชุด relevance labels อยู่ใน `evaluation_qrels.json` และรายงานฉบับเต็มจะถูกบันทึกเป็น
+`evaluation_report.json` หากเปลี่ยน corpus หรือวิธีแบ่ง chunk ต้องตรวจและแก้ qrels ใหม่
+
+ผลการทดลองและข้อสรุปล่าสุดอ่านได้ที่ `EVALUATION.md`
+
 ## ตรวจสอบก่อนรัน
 
 ```bash
