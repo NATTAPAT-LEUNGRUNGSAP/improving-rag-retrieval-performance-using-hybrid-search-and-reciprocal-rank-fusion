@@ -116,6 +116,25 @@ python evaluate_performance.py
 
 ผลการทดลองและข้อสรุปล่าสุดอ่านได้ที่ `EVALUATION.md`
 
+### ผลการประเมินล่าสุด (Baseline ตามโจทย์)
+
+ประเมินจาก corpus 53 chunks และคำถามภาษาไทย 5 ข้อ:
+
+| รายการ | ผลลัพธ์ |
+|---|---:|
+| Lab 1 index completeness | ผ่าน |
+| Vector Hit@5 | 1.000 |
+| Vector Recall@5 | 0.933 |
+| RRF Hit@5 | 1.000 |
+| RRF Recall@5 | 0.933 |
+| Hybrid latency เฉลี่ย | 60.878 ms |
+
+BM25 ใน baseline ไม่คืนผลลัพธ์สำหรับคำถามภาษาไทย เนื่องจากโจทย์ใช้ Standard
+Analyzer ซึ่งมองข้อความภาษาไทยที่ไม่มีช่องว่างเป็น token ยาว ทำให้ RRF ranking
+ในการทดลองนี้เหมือนกับ Vector ranking ผลนี้เป็นข้อจำกัดของ baseline ไม่ใช่การเปลี่ยน
+สูตร RRF รายละเอียด metrics, ranking รายคำถาม และข้อจำกัดทั้งหมดอยู่ใน
+[`EVALUATION.md`](EVALUATION.md)
+
 ## ตรวจสอบก่อนรัน
 
 ```bash
