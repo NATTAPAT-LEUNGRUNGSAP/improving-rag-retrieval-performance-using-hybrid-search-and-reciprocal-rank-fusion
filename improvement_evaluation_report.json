@@ -1,0 +1,628 @@
+{
+  "experiment": {
+    "baseline": "Standard-analyzer BM25 + vector search + RRF",
+    "improved": "Thai-analyzer BM25 + the same vector search + the same RRF",
+    "weighted_improved": "Thai-analyzer BM25 (weight 0.25) + vector search (weight 1.0) + weighted RRF",
+    "controlled_variables": "Corpus, chunks, embeddings, candidate pool, RRF k, qrels and final-answer LLM are unchanged."
+  },
+  "analyzer_example": {
+    "text": "อาการของโรคหัดเยอรมัน",
+    "baseline": {
+      "analyzer": "standard",
+      "tokens": [
+        "อาการของโรคหัดเยอรมัน"
+      ]
+    },
+    "improved": {
+      "analyzer": "thai",
+      "tokens": [
+        "อาการ",
+        "โรค",
+        "หัดเยอรมัน"
+      ]
+    }
+  },
+  "configuration": {
+    "questions": 5,
+    "top_k": 5,
+    "candidates": 10,
+    "repeats": 3,
+    "rrf_k": 60
+  },
+  "aggregate_retrieval_metrics": {
+    "baseline_bm25": {
+      "hit@5": 0,
+      "precision@5": 0.0,
+      "recall@5": 0.0,
+      "reciprocal_rank": 0.0,
+      "ndcg@5": 0.0
+    },
+    "thai_bm25": {
+      "hit@5": 1,
+      "precision@5": 0.24,
+      "recall@5": 0.6667,
+      "reciprocal_rank": 0.5567,
+      "ndcg@5": 0.5344
+    },
+    "vector": {
+      "hit@5": 1,
+      "precision@5": 0.36,
+      "recall@5": 0.9333,
+      "reciprocal_rank": 1.0,
+      "ndcg@5": 0.8617
+    },
+    "baseline_rrf": {
+      "hit@5": 1,
+      "precision@5": 0.36,
+      "recall@5": 0.9333,
+      "reciprocal_rank": 1.0,
+      "ndcg@5": 0.8617
+    },
+    "improved_rrf": {
+      "hit@5": 1,
+      "precision@5": 0.28,
+      "recall@5": 0.7333,
+      "reciprocal_rank": 0.9,
+      "ndcg@5": 0.7288
+    },
+    "weighted_rrf": {
+      "hit@5": 1,
+      "precision@5": 0.4,
+      "recall@5": 1.0,
+      "reciprocal_rank": 0.7667,
+      "ndcg@5": 0.7987
+    }
+  },
+  "latency": {
+    "baseline_bm25": {
+      "mean_ms": 3.491,
+      "p95_ms": 5.421,
+      "min_ms": 2.365,
+      "max_ms": 5.421
+    },
+    "thai_bm25": {
+      "mean_ms": 5.845,
+      "p95_ms": 8.365,
+      "min_ms": 3.996,
+      "max_ms": 8.365
+    },
+    "baseline_embedding": {
+      "mean_ms": 40.361,
+      "p95_ms": 54.17,
+      "min_ms": 30.842,
+      "max_ms": 54.17
+    },
+    "baseline_vector": {
+      "mean_ms": 14.821,
+      "p95_ms": 18.549,
+      "min_ms": 10.708,
+      "max_ms": 18.549
+    },
+    "improved_embedding": {
+      "mean_ms": 40.22,
+      "p95_ms": 49.076,
+      "min_ms": 28.599,
+      "max_ms": 49.076
+    },
+    "improved_vector": {
+      "mean_ms": 14.933,
+      "p95_ms": 20.307,
+      "min_ms": 10.093,
+      "max_ms": 20.307
+    },
+    "baseline_rrf_total": {
+      "mean_ms": 58.686,
+      "p95_ms": 74.096,
+      "min_ms": 46.127,
+      "max_ms": 74.096
+    },
+    "improved_rrf_total": {
+      "mean_ms": 61.023,
+      "p95_ms": 75.077,
+      "min_ms": 42.833,
+      "max_ms": 75.077
+    }
+  },
+  "per_query": [
+    {
+      "id": "q1",
+      "question": "โรคหัดและโรคหัดเยอรมันแตกต่างกันอย่างไร?",
+      "relevant_doc_ids": [
+        "doc_1",
+        "doc_8"
+      ],
+      "methods": {
+        "baseline_bm25": {
+          "top_doc_ids": [],
+          "metrics": {
+            "hit@5": 0,
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "reciprocal_rank": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "thai_bm25": {
+          "top_doc_ids": [
+            "doc_8",
+            "doc_2",
+            "doc_1",
+            "doc_13",
+            "doc_3"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.9197
+          }
+        },
+        "vector": {
+          "top_doc_ids": [
+            "doc_1",
+            "doc_2",
+            "doc_3",
+            "doc_8",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8772
+          }
+        },
+        "baseline_rrf": {
+          "top_doc_ids": [
+            "doc_1",
+            "doc_2",
+            "doc_3",
+            "doc_8",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8772
+          }
+        },
+        "improved_rrf": {
+          "top_doc_ids": [
+            "doc_1",
+            "doc_2",
+            "doc_8",
+            "doc_3",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.9197
+          }
+        },
+        "weighted_rrf": {
+          "top_doc_ids": [
+            "doc_1",
+            "doc_2",
+            "doc_8",
+            "doc_3",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.9197
+          }
+        }
+      }
+    },
+    {
+      "id": "q2",
+      "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+      "relevant_doc_ids": [
+        "doc_2",
+        "doc_13"
+      ],
+      "methods": {
+        "baseline_bm25": {
+          "top_doc_ids": [],
+          "metrics": {
+            "hit@5": 0,
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "reciprocal_rank": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "thai_bm25": {
+          "top_doc_ids": [
+            "doc_25",
+            "doc_37",
+            "doc_10",
+            "doc_13",
+            "doc_8"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "reciprocal_rank": 0.25,
+            "ndcg@5": 0.2641
+          }
+        },
+        "vector": {
+          "top_doc_ids": [
+            "doc_2",
+            "doc_0",
+            "doc_1",
+            "doc_13",
+            "doc_15"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8772
+          }
+        },
+        "baseline_rrf": {
+          "top_doc_ids": [
+            "doc_2",
+            "doc_0",
+            "doc_1",
+            "doc_13",
+            "doc_15"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8772
+          }
+        },
+        "improved_rrf": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_1",
+            "doc_0",
+            "doc_10",
+            "doc_25"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.6131
+          }
+        },
+        "weighted_rrf": {
+          "top_doc_ids": [
+            "doc_0",
+            "doc_1",
+            "doc_13",
+            "doc_10",
+            "doc_2"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 0.3333,
+            "ndcg@5": 0.5438
+          }
+        }
+      }
+    },
+    {
+      "id": "q3",
+      "question": "ทำไมโรคหัดเยอรมันจึงมีอันตรายกับหญิงตั้งครรภ์?",
+      "relevant_doc_ids": [
+        "doc_6",
+        "doc_11"
+      ],
+      "methods": {
+        "baseline_bm25": {
+          "top_doc_ids": [],
+          "metrics": {
+            "hit@5": 0,
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "reciprocal_rank": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "thai_bm25": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_4",
+            "doc_6",
+            "doc_9",
+            "doc_1"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "reciprocal_rank": 0.3333,
+            "ndcg@5": 0.3066
+          }
+        },
+        "vector": {
+          "top_doc_ids": [
+            "doc_6",
+            "doc_1",
+            "doc_2",
+            "doc_4",
+            "doc_11"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8503
+          }
+        },
+        "baseline_rrf": {
+          "top_doc_ids": [
+            "doc_6",
+            "doc_1",
+            "doc_2",
+            "doc_4",
+            "doc_11"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8503
+          }
+        },
+        "improved_rrf": {
+          "top_doc_ids": [
+            "doc_6",
+            "doc_4",
+            "doc_13",
+            "doc_1",
+            "doc_9"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 0.5,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.6131
+          }
+        },
+        "weighted_rrf": {
+          "top_doc_ids": [
+            "doc_6",
+            "doc_1",
+            "doc_4",
+            "doc_13",
+            "doc_11"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.8503
+          }
+        }
+      }
+    },
+    {
+      "id": "q4",
+      "question": "ถ้าคนที่ฉีดวัคซีนป้องกันโรคหัดเยอรมันแล้ว จะมีโอกาสติดเชื้อหรือไม่?",
+      "relevant_doc_ids": [
+        "doc_13"
+      ],
+      "methods": {
+        "baseline_bm25": {
+          "top_doc_ids": [],
+          "metrics": {
+            "hit@5": 0,
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "reciprocal_rank": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "thai_bm25": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_10",
+            "doc_25",
+            "doc_11",
+            "doc_9"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "vector": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_2",
+            "doc_11",
+            "doc_1",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "baseline_rrf": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_2",
+            "doc_11",
+            "doc_1",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "improved_rrf": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_11",
+            "doc_10",
+            "doc_2",
+            "doc_6"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 1.0
+          }
+        },
+        "weighted_rrf": {
+          "top_doc_ids": [
+            "doc_13",
+            "doc_2",
+            "doc_11",
+            "doc_6",
+            "doc_10"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 1.0,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 1.0
+          }
+        }
+      }
+    },
+    {
+      "id": "q5",
+      "question": "โรคหัดเยอรมันมีผลกระทบอย่างไรต่อระบบสาธารณสุขและเศรษฐกิจของประเทศ?",
+      "relevant_doc_ids": [
+        "doc_1",
+        "doc_6",
+        "doc_13"
+      ],
+      "methods": {
+        "baseline_bm25": {
+          "top_doc_ids": [],
+          "metrics": {
+            "hit@5": 0,
+            "precision@5": 0.0,
+            "recall@5": 0.0,
+            "reciprocal_rank": 0.0,
+            "ndcg@5": 0.0
+          }
+        },
+        "thai_bm25": {
+          "top_doc_ids": [
+            "doc_46",
+            "doc_18",
+            "doc_2",
+            "doc_16",
+            "doc_13"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.2,
+            "recall@5": 0.3333,
+            "reciprocal_rank": 0.2,
+            "ndcg@5": 0.1815
+          }
+        },
+        "vector": {
+          "top_doc_ids": [
+            "doc_1",
+            "doc_2",
+            "doc_6",
+            "doc_3",
+            "doc_10"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 0.6667,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.7039
+          }
+        },
+        "baseline_rrf": {
+          "top_doc_ids": [
+            "doc_1",
+            "doc_2",
+            "doc_6",
+            "doc_3",
+            "doc_10"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 0.6667,
+            "reciprocal_rank": 1.0,
+            "ndcg@5": 0.7039
+          }
+        },
+        "improved_rrf": {
+          "top_doc_ids": [
+            "doc_2",
+            "doc_6",
+            "doc_10",
+            "doc_13",
+            "doc_46"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.4,
+            "recall@5": 0.6667,
+            "reciprocal_rank": 0.5,
+            "ndcg@5": 0.4982
+          }
+        },
+        "weighted_rrf": {
+          "top_doc_ids": [
+            "doc_2",
+            "doc_6",
+            "doc_10",
+            "doc_13",
+            "doc_1"
+          ],
+          "metrics": {
+            "hit@5": 1,
+            "precision@5": 0.6,
+            "recall@5": 1.0,
+            "reciprocal_rank": 0.5,
+            "ndcg@5": 0.6797
+          }
+        }
+      }
+    }
+  ]
+}

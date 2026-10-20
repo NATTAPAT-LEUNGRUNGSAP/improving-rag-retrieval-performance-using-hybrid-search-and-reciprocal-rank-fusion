@@ -19,6 +19,10 @@
 ├── corpus_input/                     # เอกสาร Markdown ตัวอย่าง 4 ไฟล์
 ├── authenticRAG.py                   # Hands-on 1: chunk, contextualize และ index
 ├── onlysearchAuthenticRAG.py         # Hands-on 2: BM25 + Vector + RRF + answer
+├── build_thai_bm25_index.py          # ส่วนปรับปรุง: สร้าง BM25 ด้วย Thai analyzer
+├── onlysearchImprovedRAG.py          # ส่วนปรับปรุง: Thai BM25 + Vector + RRF
+├── evaluate_improvement.py           # เปรียบเทียบ Baseline กับระบบปรับปรุง
+├── ASSIGNMENT_COMPARISON.md           # คำอธิบายความแตกต่างตามข้อ (3)
 ├── docker-compose.yml                # OpenSearch 2.19.1
 ├── requirements.txt                  # Python dependencies
 ├── .env.example                      # ตัวอย่าง environment variables
@@ -96,7 +100,24 @@ python onlysearchAuthenticRAG.py
 
 ผลลัพธ์จะถูกบันทึกเป็น `authentic_rag_search_results.json`
 
-## 6. วัดผล Lab 1 และ Lab 2
+## 6. ส่วนปรับปรุงตาม Assignment
+
+Baseline ตามสไลด์ยังคงใช้ `anthropic-bm25-index` ซึ่งเป็น Standard analyzer
+ส่วนระบบปรับปรุงสร้าง index ใหม่ชื่อ `anthropic-bm25-thai-index` เพื่อไม่เขียนทับ
+Baseline และควบคุมให้ corpus, chunks, embedding, Vector Search, RRF และ LLM เหมือนเดิม
+
+```bash
+python build_thai_bm25_index.py --recreate
+python evaluate_improvement.py
+python onlysearchImprovedRAG.py
+```
+
+ผลล่าสุดจากคำถาม 5 ข้อพบว่า Thai BM25 มี Recall@5 เพิ่มจาก `0.000` เป็น `0.667`
+และ Weighted RRF (Thai BM25 weight 0.25, Vector weight 1.0) มี Recall@5 เพิ่มจาก
+Baseline RRF `0.933` เป็น `1.000` รายละเอียดและข้อจำกัดอ่านได้ที่
+[`ASSIGNMENT_COMPARISON.md`](ASSIGNMENT_COMPARISON.md)
+
+## 7. วัดผล Lab 1 และ Lab 2
 
 หลังจาก OpenSearch ทำงานและมีข้อมูลในทั้งสอง index แล้ว ให้รัน:
 

@@ -91,6 +91,10 @@ Vector แทนที่จะเกิดประโยชน์จากก�
 ที่ไม่มีการเว้นวรรคระหว่างคำ งานต่อไปควรทดลอง Thai tokenizer หรือ character n-gram analyzer
 แล้วสร้าง BM25 index ใหม่ ก่อนวัดผลเปรียบเทียบอีกครั้ง
 
+การทดลองส่วนปรับปรุงได้ดำเนินการแล้วโดยสร้าง `anthropic-bm25-thai-index`
+แยกจาก Baseline ผลเต็มอยู่ใน `improvement_evaluation_report.json` และคำอธิบาย
+เปรียบเทียบตาม Assignment อยู่ใน `ASSIGNMENT_COMPARISON.md`
+
 ชุด qrels นี้กำหนดด้วยการตรวจเนื้อหาใน corpus โดยมนุษย์ หากเปลี่ยน corpus หรือวิธีแบ่ง
 chunk ต้องตรวจ relevance labels ใหม่ และคะแนนชุดนี้ยังไม่ใช่การประเมินคำตอบเชิงข้อเท็จจริง
 แบบผู้เชี่ยวชาญทางการแพทย์

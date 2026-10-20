@@ -50,9 +50,9 @@ def ranking_metrics(ranked_ids, relevant_ids, k):
     }
 
 
-def sparse_search(client, query, k):
+def sparse_search(client, query, k, index=BM25_INDEX):
     response = client.search(
-        index=BM25_INDEX,
+        index=index,
         body={
             "query": {
                 "multi_match": {
